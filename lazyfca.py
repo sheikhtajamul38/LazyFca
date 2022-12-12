@@ -50,53 +50,61 @@ def intersection(example, context):
     return [intersection_res, count]
 
 
-def aggregate1(plus_massiv,  plus_count, minus_massiv, minus_count):
-    psum = sum([len(p) for p in plus_massiv])
-    size_plus = len(plus_massiv)
-    msum = sum([len(p) for p in minus_massiv])
-    size_minus = len(minus_massiv)
-    k = plus_count/psum
-    z = minus_count/msum
+def calculate(plus_con,  plus_count, minus_con, minus_count):
+    k = plus_count/sum([len(p) for p in plus_con])
+    z = minus_count/sum([len(p) for p in minus_con])
     return k<=z
 
-def classifier2(X_train, X_test, y_train, y_test):
+
+def predict(X_train, X_test, y_train, y_test):
     """Converting training and testing data to lists
     Creating positive and negative intents for the loaded data
     """
-    X_tr = X_train.values.tolist()
-    X_ts = X_test.values.tolist()
-    y_tr = y_train.values.tolist()
-    y_ts = y_test.values.tolist()
 
-    plus_intent = [create_intent(O) for i, O in enumerate(X_tr) if y_tr[i]] 
+    positive = [create_intent(O) for i, O in enumerate(X_train.values.tolist()) if y_train.values.tolist()[i]] 
     
-    minus_intent = [create_intent(O) for i, O in enumerate(X_tr) if not y_tr[i]]
+    negative = [create_intent(O) for i, O in enumerate(X_train.values.tolist()) if not y_train.values.tolist()[i]]
     
-    results = {'tp': 0, 'fp': 0, 'tn': 0, 'fn': 0, 'contr': 0} 
+    results = {'TP': 0, 'FP': 0, 'TN': 0, 'FN': 0, 'CTR': 0} 
     
-    for j, i in enumerate(X_ts):
+    for j, i in enumerate(X_test.values.tolist()):
         label = {'plus': False, 'minus': False}
         
-        plus = intersection(i, plus_intent)
-        minus = intersection(i, minus_intent)
-        plus_massiv = plus[0]
-        plus_count = plus[1]
-        minus_massiv = minus[0]
-        minus_count = minus[1]
-        if aggregate1(plus_massiv,  plus_count, minus_massiv, minus_count):
+        plus = intersection(i, positive)
+        minus = intersection(i, negative)
+
+        #pos = plus[1]/sum([len(p) for p in plus[0]])
+        #neg = minus[1]/sum([len(m) for m in minus[0]])
+
+        if calculate(plus[0],  plus[1], minus[0], minus[1]):
             label['plus'] = True
+
         else:
             label['minus'] = True
+
         if label['plus'] and not label['minus']:
-            if y_ts[j]:
-                results['tp']+=1
+            if y_test.values.tolist()[j]:
+                results['TP']+=1
             else: 
-                results['fp']+=1
+                results['FP']+=1
+
         elif label['minus'] and not label['plus']:
-            if y_ts[j]:
-                results['fn']+=1
+            if y_test.values.tolist()[j]:
+                results['FN']+=1
             else: 
-                results['tn']+=1
+                results['TN']+=1
         else:
-            results['contr']+=1 #updating contradictory classes
+            results['CTR']+=1 #updating contradictory classes
     return results
+
+
+def classificationReport(results):
+    acc = (results['TP'] + results['TN']) / (results['TP'] + results['TN'] + results['FP'] + results['FN'])
+    precision = results['TP'] / (results['TP'] + results['FP'])
+
+    recall = results['TP'] / (results['TP'] + results['FN'])
+    data = [{"Accuracy":acc*100,"Precision":precision*100,'Recall':recall*100}]
+    #print("Classification Report")
+    df = pd.DataFrame(data)
+    return df
+    

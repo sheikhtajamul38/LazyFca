@@ -1,0 +1,14 @@
+{
+"meta":{"test_sets":[],"test_metrics":[],"learn_metrics":[{"best_value":"Min","name":"Logloss"}],"launch_mode":"Train","parameters":"","iteration_count":10,"learn_sets":["learn"],"name":"experiment"},
+"iterations":[
+{"learn":[0.2358679166],"iteration":0,"passed_time":0.2342854209,"remaining_time":2.108568788},
+{"learn":[0.1559587608],"iteration":1,"passed_time":0.2564951402,"remaining_time":1.025980561},
+{"learn":[0.1022156397],"iteration":2,"passed_time":0.2645626526,"remaining_time":0.617312856},
+{"learn":[0.08430311668],"iteration":3,"passed_time":0.2720753235,"remaining_time":0.4081129852},
+{"learn":[0.07236871537],"iteration":4,"passed_time":0.2791791083,"remaining_time":0.2791791083},
+{"learn":[0.06013257761],"iteration":5,"passed_time":0.2826677964,"remaining_time":0.1884451976},
+{"learn":[0.0555520545],"iteration":6,"passed_time":0.2918162024,"remaining_time":0.1250640867},
+{"learn":[0.04907961868],"iteration":7,"passed_time":0.2948903827,"remaining_time":0.07372259567},
+{"learn":[0.04418825265],"iteration":8,"passed_time":0.3061045739,"remaining_time":0.03401161932},
+{"learn":[0.03746938771],"iteration":9,"passed_time":0.3095094615,"remaining_time":0}
+]}
