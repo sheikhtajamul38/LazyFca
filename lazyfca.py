@@ -56,6 +56,8 @@ def calculate(plus_con,  plus_count, minus_con, minus_count):
     return k<=z
 
 
+
+
 def predict(X_train, X_test, y_train, y_test):
     """Converting training and testing data to lists
     Creating positive and negative intents for the loaded data

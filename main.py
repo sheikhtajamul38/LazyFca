@@ -58,11 +58,15 @@ def intersection(example,context):
     return [result for result in example if result in context]
 
 
+def binarize_X1(X: pd.DataFrame) -> 'pd.DataFrame[bool]':
+    """Scale values from X into pandas.DataFrame of binary values"""
+    dummies = [pd.get_dummies(X[f], prefix=f, prefix_sep=': ') for f in X.columns]
+    X_bin = pd.concat(dummies, axis=1).astype(bool)
+    return X_bin
 
-
-def fitClassifier(X,y,sample_share=0.5,random=False,threshold=0.001):
+def fitClassifier(X,y,sample_share=0.5,random=True,threshold=0.000000000001):
     
-    X = binarize_X(X)
+    X = binarize_X1(X)
     y = binarize_y(y)
     global plus,minus,plus_obj,minus_obj
 
@@ -82,7 +86,7 @@ def fitClassifier(X,y,sample_share=0.5,random=False,threshold=0.001):
 
 def predict(X,bias='random'):
     random.seed(random_seed)
-    X = binarize_X(X)
+    X = binarize_X1(X)
     predictions = []
     for i in range(X.shape[0]):
         extent = make_extent(X.iloc[i])
