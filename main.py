@@ -64,7 +64,7 @@ def binarize_X1(X: pd.DataFrame) -> 'pd.DataFrame[bool]':
     X_bin = pd.concat(dummies, axis=1).astype(bool)
     return X_bin
 
-def fitClassifier(X,y,sample_share=0.5,random=True,threshold=0.000000000001):
+def fitClassifier(X,y,sample_share=0.5,random=True,threshold=0.001):
     
     X = binarize_X1(X)
     y = binarize_y(y)
