@@ -5,7 +5,7 @@ This project is created as part of the course "Ordered sets in data analysis". I
 ## Lazy Classifier comaprision on different datasets
 
 ![classify_threshold](https://user-images.githubusercontent.com/43438702/207222611-db0f88a3-ed18-4efe-8a1d-31a72db8bcfe.png)
-![Classifier_comparison](https://user-images.githubusercontent.com/43438702/207222629-82c5b060-c73e-48f4-a794-efd00241a34a.png)
+![Classifier_comparison](https://user-images.githubusercontent.com/43438702/207384528-7be5af76-c755-49f3-90b4-f00c6a41b3b7.png)
 ![without_threshold](https://user-images.githubusercontent.com/43438702/207222964-53df394e-1e08-4327-9f94-a65851899fdf.png)
 ![optimized](https://user-images.githubusercontent.com/43438702/207223832-369e75a2-670a-4efc-914e-9b76a50d5197.png)
 ![fruits](https://user-images.githubusercontent.com/43438702/207223858-96792457-3109-4661-a76a-db63fa38fa99.png)
